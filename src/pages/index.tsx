@@ -1,8 +1,8 @@
 import { SignUp } from "../components";
 
-function IndexPage(props) {
+function Page(props) {
 
     return <SignUp />;
 }
 
-export default IndexPage;
+export default Page;

@@ -3,7 +3,7 @@
     width: 100vw;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: right;
 
     .backgroundImage {
         position: fixed;
@@ -12,31 +12,104 @@
         z-index: -1;
     }
 
+    .leftcol {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        width: 100%;
+        height: 100%;
+        padding: 1em;
 
-    .content {
-        display: flex;
-        align-items: center;
-        z-index: 1;
-        flex-direction: column;
-        border: 2px solid #FF0066;
-        border-radius: 5px;
-        padding: 4em;
-        background-color: #fff;
-
-        >* {
-            margin: 0.4em;
-            width: 100%;
+        >div {
+            background-color: #0080ff;
+            position: relative;
         }
 
-        >input {
-            font-size: 1em;
-            outline: none;
-            padding: 0.4em;
+        .one {
+            grid-column: 1;
+            grid-row: 1;
         }
 
-        .submit {
-            border: 1px solid #FF0066;
-            padding: 0.4em;
+        .two {
+            grid-column: 2 /4;
+            grid-row: 1 / 4;
+        }
+
+        .three {
+            grid-column: 1;
+            grid-row: 2 / 5;
+        }
+
+        .four {
+            grid-column: 1;
+            grid-row: 1;
+        }
+
+        .five {
+            grid-column: 2;
+            grid-row: 4;
+        }
+
+        .six {
+            grid-column: 3;
+            grid-row: 4;
         }
     }
+
+    .rightcol {
+        display: flex;
+        min-width: 40%;
+        justify-content: center;
+
+        .content {
+            display: flex;
+            align-items: center;
+            z-index: 1;
+            flex-direction: column;
+            border-radius: 5px;
+            padding: 1em;
+            background-color: #fff;
+            width: 360px;
+            box-shadow: -7px 5px 71px -23px rgba(0, 0, 0, 0.63);
+            -webkit-box-shadow: -7px 5px 71px -23px rgba(0, 0, 0, 0.63);
+            -moz-box-shadow: -7px 5px 71px -23px rgba(0, 0, 0, 0.63);
+            margin: 1em;
+            border: 1px solid rgb(160, 160, 160);
+
+            >* {
+                width: 100%;
+                font-weight: 400;
+                border-radius: 5px;
+            }
+
+            >input {
+                font-size: 1em;
+                outline: none;
+                padding: 0.6em 1em;
+                margin-bottom: 0.8em;
+                border: 1px solid rgb(185, 185, 185);
+                background-color: rgb(247, 247, 247);
+            }
+
+            .submit {
+                background-color: #001122;
+                color: #fff;
+                padding: 0.5em;
+                text-align: center;
+                font-size: 1.1em;
+                font-weight: 500;
+                cursor: pointer;
+            }
+        }
+    }
+
+}
+
+@media (max-width:970px) {
+    .container {
+        .leftcol {
+            display: none;
+        }
+    }
+
 }
