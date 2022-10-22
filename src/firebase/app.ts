@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
-import { setDoc, doc, getFirestore } from 'firebase/firestore';
 import config from './config';
-export default () => {
+const app = () => {
     return initializeApp(config());
 }
+export default app;

@@ -8,10 +8,14 @@ import style from './style.module.scss';
 import axios from 'axios';
 import Image from "next/image";
 function SignUp() {
-    const [username, setUsername] = useState<string>("")
-    const [password, setPassword] = useState<string>("")
-    const [email, setEmail] = useState<string>("")
-
+    const [username, setUsername] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+    const [email, setEmail] = useState<string>("");
+    const [errors, setErrors] = useState({
+        username: "",
+        password: "",
+        email: ""
+    })
     const stateChange = (e: ChangeEvent, setter: Dispatch<SetStateAction<string>>) => {
         const element = e.target as HTMLInputElement;
         setter(element.value);
@@ -24,6 +28,7 @@ function SignUp() {
             password,
             email
         });
+        console.log(f.data);
         return f;
     }
     return (
@@ -31,29 +36,36 @@ function SignUp() {
             {/* extra background */}
             <div className={style.container} >
                 <div className={style.leftcol}>
-                    <div className={style.one}><Image src={Image2} layout={"fill"} objectFit={"contain"} loading={"lazy"} /></div>
-                    <div className={style.two}><Image src={Image1} layout={"fill"} objectFit={"contain"} loading={"lazy"} /></div>
-                    <div className={style.three}><Image src={Image3} layout={"fill"} objectFit={"contain"} loading={"lazy"} /></div>
-                    <div className={style.four}><Image src={Image4} layout={"fill"} objectFit={"contain"} loading={"lazy"} /></div>
+                    <div className={style.one}><Image src={Image2} alt={"image1"} layout={"fill"} objectFit={"contain"} loading={"lazy"} /></div>
+                    <div className={style.two}><Image src={Image1} alt={"image2"} layout={"fill"} objectFit={"contain"} loading={"lazy"} /></div>
+                    <div className={style.three}><Image src={Image3} alt={"image3"} layout={"fill"} objectFit={"contain"} loading={"lazy"} /></div>
+                    <div className={style.four}><Image src={Image4} alt={"image4"} layout={"fill"} objectFit={"contain"} loading={"lazy"} /></div>
                 </div>
                 <div className={style.rightcol}>
                     <div className={style.content}>
                         <div>
                             <h1>Sign Up</h1>
-                            <small>It's Quick And Easy</small>
+                            <small>It&apos;s Quick And Easy</small>
                         </div>
                         <br />
                         <h1></h1>
-                        <input placeholder="Username" type={"text"} onChange={(e) => stateChange(e, setUsername)}></input>
-                        <input placeholder="Password" type={"password"} onChange={(e) => stateChange(e, setPassword)}></input>
-                        <input placeholder="Email" type={"text"} onChange={(e) => stateChange(e, setEmail)}></input>
+                        <input name="username" placeholder="Username" type={"text"} onChange={(e) => stateChange(e, setUsername)}></input>
+                        <small style={{ color: "#ff0000" }}>{errors.username}</small>
+                        <br />
+                        <input name="password" placeholder="Password" type={"password"} onChange={(e) => stateChange(e, setPassword)}></input>
+                        <small style={{ color: "#ff0000" }}>{errors.password}</small>
+
+                        <br />
+                        <input name="email" placeholder="Email" type={"text"} onChange={(e) => stateChange(e, setEmail)}></input>
+                        <small style={{ color: "#ff0000" }}>{errors.email}</small>
+                        <br />
                         <div className={style.submit} onClick={SendData}>Sign up</div>
                         <br />
                         <hr />
                         <br />
                         <small style={{ "textAlign": "center" }}>
-                            Already have account?
-                            <a href="#" onClick={SendData}> Login.</a>
+                            Already have account?{" "}
+                            <a href="#" onClick={SendData}>Login.</a>
                         </small>
                         <br />
                     </div>

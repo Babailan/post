@@ -1,4 +1,9 @@
-import config from "./config";
+// auth firebase
+import { getAuth } from 'firebase/auth'
+import app from './app';
 
-export default () => {
+function auth() {
+    const auth = getAuth(app());
+    return auth;
 }
+export default auth;

@@ -1,1 +1,3 @@
-export default "";
+// 
+const nun = ""
+export default nun;

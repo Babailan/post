@@ -4,7 +4,8 @@ import app from "./app";
 
 // get the firestore service which is from firebase -> 
 // usage -> to get the database and query shits, i know it the usage of database ye that's it.
-export default () => {
+const db = () => {
     const firestore = getFirestore(app());
     return firestore;
 };
+export default db;

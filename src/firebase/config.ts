@@ -1,5 +1,5 @@
 // use to get the firebase config.
-export default () => {
+const config = () => {
     return {
         apiKey: process.env.apiKey,
         authDomain: process.env.authDomain,
@@ -9,3 +9,4 @@ export default () => {
         appId: process.env.appId
     };
 };
+export default config

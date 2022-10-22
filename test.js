@@ -1,19 +1,14 @@
-function Army(n, m) {
-    const total = n * m;
-
-    const leftovers = total % 4;
-
-    const divided = total / 4;
-    console.log(divided);
-    if (leftovers) {
-        if (leftovers === 3) {
-            return Math.floor(total / 4) + 2;
-        } else {
-            return Math.floor(total / 4) + 1;
+function test(n) {
+    if (n < 2) {
+        return 0;
+    }
+    for (let i = 2; i <= n; i++) {
+        const answer = n / i;
+        if (answer % 1 === 0) {
+            return i;
         }
     }
-    return Math.floor(total / 4);
 }
 
 
-Army(999, 999)
+test(10000000000);

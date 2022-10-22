@@ -1,0 +1,17 @@
+import { Html, Head, Main, NextScript } from 'next/document'
+
+export default function Document() {
+    return (
+        <Html>
+            <Head >
+                {/* load icons from google api */}
+                <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+                    rel="stylesheet"></link>
+            </Head>
+            <body>
+                <Main />
+                <NextScript />
+            </body>
+        </Html>
+    )
+}
