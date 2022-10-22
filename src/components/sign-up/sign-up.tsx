@@ -1,8 +1,9 @@
 // import Image from "next/image";
 import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
-import BackgroundImage from '../../images/simpleb.svg'
 import Image1 from '../../images/d.jpg'
 import Image2 from '../../images/a.jpg'
+import Image3 from '../../images/c.jpg'
+import Image4 from '../../images/b.jpg'
 import style from './style.module.scss';
 import axios from 'axios';
 import Image from "next/image";
@@ -23,19 +24,17 @@ function SignUp() {
             password,
             email
         });
-        console.log(f)
         return f;
     }
     return (
         <>
             {/* extra background */}
-            <div className={style.backgroundImage}>
-                {/* <Image src={BackgroundImage} layout={"fill"} objectFit={"cover"} /> */}
-            </div>
             <div className={style.container} >
                 <div className={style.leftcol}>
-                    <div className={style.one}><Image src={Image2} layout={"fill"} objectFit={"cover"} /></div>
-                    <div className={style.two}><Image src={Image1} layout={"fill"} objectFit={"cover"} loading={"lazy"} /></div>
+                    <div className={style.one}><Image src={Image2} layout={"fill"} objectFit={"contain"} loading={"lazy"} /></div>
+                    <div className={style.two}><Image src={Image1} layout={"fill"} objectFit={"contain"} loading={"lazy"} /></div>
+                    <div className={style.three}><Image src={Image3} layout={"fill"} objectFit={"contain"} loading={"lazy"} /></div>
+                    <div className={style.four}><Image src={Image4} layout={"fill"} objectFit={"contain"} loading={"lazy"} /></div>
                 </div>
                 <div className={style.rightcol}>
                     <div className={style.content}>
