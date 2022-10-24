@@ -1,62 +1,68 @@
 // import Image from "next/image";
-import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
-import Image1 from '../../images/d.jpg'
-import Image2 from '../../images/a.jpg'
-import Image3 from '../../images/c.jpg'
-import Image4 from '../../images/b.jpg'
+import { useEffect, useRef, useState } from "react";
 import style from './style.module.scss';
 import axios from 'axios';
-import Image from "next/image";
+import { Input } from "../input";
+import { Leftcol } from "../leftcol";
+import Link from "next/link";
+import auth from "../../firebase/auth";
+import Router from "next/router";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import validator from "./validator";
+
 function SignUp() {
-    const [username, setUsername] = useState<string>("");
+    const [displayName, setDisplayName] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [errors, setErrors] = useState({
         username: "",
         password: "",
         email: ""
-    })
-    const stateChange = (e: ChangeEvent, setter: Dispatch<SetStateAction<string>>) => {
-        const element = e.target as HTMLInputElement;
-        setter(element.value);
-    };
-
+    });
+    const ref = useRef<HTMLDivElement>();
+    useEffect(() => {
+        window.scrollTo(0, ref.current.offsetTop);
+    }, []);
 
     async function SendData() {
-        const f = await axios.post('/api/sign-up', {
-            username,
-            password,
-            email
-        });
-        console.log(f.data);
-        return f;
-    }
+        try {
+            const f = await createUserWithEmailAndPassword(auth(), email, password);
+            console.log(f);
+        }
+        catch (err) {
+
+            validator(err.code, setErrors)
+        }
+    };
+
     return (
         <>
             {/* extra background */}
             <div className={style.container} >
-                <div className={style.leftcol}>
-                    <div className={style.one}><Image src={Image2} alt={"image1"} layout={"fill"} objectFit={"contain"} loading={"lazy"} /></div>
-                    <div className={style.two}><Image src={Image1} alt={"image2"} layout={"fill"} objectFit={"contain"} loading={"lazy"} /></div>
-                    <div className={style.three}><Image src={Image3} alt={"image3"} layout={"fill"} objectFit={"contain"} loading={"lazy"} /></div>
-                    <div className={style.four}><Image src={Image4} alt={"image4"} layout={"fill"} objectFit={"contain"} loading={"lazy"} /></div>
-                </div>
+                <Leftcol />
                 <div className={style.rightcol}>
-                    <div className={style.content}>
+                    <div className={style.content} ref={ref}>
                         <div>
                             <h1>Sign Up</h1>
-                            <small>It&apos;s Quick And Easy</small>
+                            <small>It&apos;s Quick And Easy.</small>
+                            <br />
+                            <Link href={"/"} >
+                                <a>
+                                    <small style={{ color: "#000" }}>
+                                        Explore more.
+                                    </small>
+                                </a>
+                            </Link>
                         </div>
                         <br />
                         <h1></h1>
-                        <input name="username" placeholder="Username" type={"text"} onChange={(e) => stateChange(e, setUsername)}></input>
+                        <Input name={"username"} placeholder={"Username"} type={"text"} setState={setDisplayName}></Input>
                         <small style={{ color: "#ff0000" }}>{errors.username}</small>
                         <br />
-                        <input name="password" placeholder="Password" type={"password"} onChange={(e) => stateChange(e, setPassword)}></input>
+                        <Input name="password" placeholder="Password" type={"password"} setState={setPassword}></Input>
                         <small style={{ color: "#ff0000" }}>{errors.password}</small>
-
                         <br />
-                        <input name="email" placeholder="Email" type={"text"} onChange={(e) => stateChange(e, setEmail)}></input>
+                        <Input name="email" placeholder="Email" type={"text"} setState={setEmail}></Input>
                         <small style={{ color: "#ff0000" }}>{errors.email}</small>
                         <br />
                         <div className={style.submit} onClick={SendData}>Sign up</div>
@@ -65,7 +71,9 @@ function SignUp() {
                         <br />
                         <small style={{ "textAlign": "center" }}>
                             Already have account?{" "}
-                            <a href="#" onClick={SendData}>Login.</a>
+                            <Link href={"/sign-in"}>
+                                <a href="#">Login.</a>
+                            </Link>
                         </small>
                         <br />
                     </div>
@@ -76,4 +84,4 @@ function SignUp() {
 }
 
 
-export default SignUp;
+export { SignUp };

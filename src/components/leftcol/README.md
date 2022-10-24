@@ -1,0 +1,1 @@
+this component Leftcol is for sign up and sign in page the images in leftside.
