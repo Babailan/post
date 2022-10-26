@@ -1,36 +1,32 @@
 // import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import style from './style.module.scss';
-import axios from 'axios';
 import { Input } from "../input";
 import { Leftcol } from "../leftcol";
 import Link from "next/link";
 import auth from "../../firebase/auth";
-import Router from "next/router";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import validator from "./validator";
 
 function SignUp() {
     const [displayName, setDisplayName] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [errors, setErrors] = useState({
-        username: "",
+        displayName: "",
         password: "",
         email: ""
     });
     const ref = useRef<HTMLDivElement>();
+
     useEffect(() => {
         window.scrollTo(0, ref.current.offsetTop);
     }, []);
 
-    async function SendData() {
+    async function createAcoount() {
         try {
             const f = await createUserWithEmailAndPassword(auth(), email, password);
-            console.log(f);
         }
         catch (err) {
-
             validator(err.code, setErrors)
         }
     };
@@ -57,7 +53,6 @@ function SignUp() {
                         <br />
                         <h1></h1>
                         <Input name={"username"} placeholder={"Username"} type={"text"} setState={setDisplayName}></Input>
-                        <small style={{ color: "#ff0000" }}>{errors.username}</small>
                         <br />
                         <Input name="password" placeholder="Password" type={"password"} setState={setPassword}></Input>
                         <small style={{ color: "#ff0000" }}>{errors.password}</small>
@@ -65,7 +60,7 @@ function SignUp() {
                         <Input name="email" placeholder="Email" type={"text"} setState={setEmail}></Input>
                         <small style={{ color: "#ff0000" }}>{errors.email}</small>
                         <br />
-                        <div className={style.submit} onClick={SendData}>Sign up</div>
+                        <div className={style.submit} onClick={createAcoount}>Sign up</div>
                         <br />
                         <hr />
                         <br />

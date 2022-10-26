@@ -7,27 +7,44 @@ import { Input } from "../input";
 import { Leftcol } from "../leftcol";
 // the css for this is also sign -up page so import the sign-up page on '../sign-up/style.module.scss';
 import style from '../sign-up/style.module.scss';
-
-
+import validator from '../../libs/codeError';
+import e from "cors";
 
 function SignIn() {
     const [password, setPassword] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const ref = useRef<HTMLDivElement>();
-
-    const [errors, setErrors] = useState({
+    const defaultErrors = {
         username: "",
         password: "",
         email: ""
-    });
+    }
+
+    const [errors, setErrors] = useState(defaultErrors);
     useEffect(() => {
         window.scrollTo(0, ref.current.offsetTop);
     }, [])
 
     const signIn = async () => {
-        const response = await axios.post("/api/sign-in", { email, password });
-        const { data } = response;
-        await signInWithEmailAndPassword(auth(), email, password);
+        if (!email) {
+            setErrors(p => {
+                return { ...p, email: "Please provide Email" };
+            })
+        }
+        if (!password) {
+            setErrors(p => {
+                return { ...p, password: "Please provide password" };
+            })
+        }
+        if (!email || !password) {
+            return;
+        }
+
+        try {
+            await signInWithEmailAndPassword(auth(), email, password);
+        } catch (err) {
+            setErrors(validator(err.code));
+        }
     }
     return (
         <div className={style.container}>
@@ -50,13 +67,11 @@ function SignIn() {
                     </div>
                     <br />
                     <h1></h1>
-                    <Input name={"email"} placeholder={"Email address"} type={"text"} setState={setEmail}></Input>
-                    <small style={{ color: "#ff0000" }}>{errors.username}</small>
+                    <Input onChange={() => setErrors(defaultErrors)} name={"email"} placeholder={"Email address"} type={"text"} hasError={errors.email} setState={setEmail}></Input>
                     <br />
-                    <Input name="password" placeholder="Password" type={"password"} setState={setPassword}></Input>
-                    <small style={{ color: "#ff0000" }}>{errors.password}</small>
+                    <Input onChange={() => setErrors(defaultErrors)} name="password" placeholder="Password" type={"password"} hasError={errors.password} setState={setPassword}></Input>
                     <br />
-                    <div className={style.submit} onClick={signIn} >Log in</div>
+                    <div className={style.submit} onClick={signIn}>Log in</div>
                     <br />
                     <hr />
                     <br />
