@@ -6,7 +6,7 @@ function code(errorCode: string) {
         password: "",
         email: ""
     }
-    console.log(errorCode);
+    console.log(JSON.stringify(errorCode));
     if (errorCode.includes("auth/invalid-email")) {
         setterObject.email = "Invalid email address."
     }

@@ -9,4 +9,4 @@ const config = () => {
         appId: "1:198552637722:web:15a9c61926da4d2fb15ca3"
     };
 };
-export default config
+export default config;

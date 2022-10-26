@@ -1,29 +1,23 @@
-import axios from "axios";
-import { signInWithCustomToken, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
-import auth from "../../firebase/auth";
+import { useState } from "react";
+import auth, { authEmulator } from "../../firebase/auth";
 import { Input } from "../input";
 import { Leftcol } from "../leftcol";
 // the css for this is also sign -up page so import the sign-up page on '../sign-up/style.module.scss';
 import style from '../sign-up/style.module.scss';
 import validator from '../../libs/codeError';
-import e from "cors";
 
 function SignIn() {
     const [password, setPassword] = useState<string>("");
     const [email, setEmail] = useState<string>("");
-    const ref = useRef<HTMLDivElement>();
     const defaultErrors = {
-        username: "",
-        password: "",
-        email: ""
+        email: "",
+        password: ""
     }
 
     const [errors, setErrors] = useState(defaultErrors);
-    useEffect(() => {
-        window.scrollTo(0, ref.current.offsetTop);
-    }, [])
+
 
     const signIn = async () => {
         if (!email) {
@@ -50,7 +44,7 @@ function SignIn() {
         <div className={style.container}>
             <Leftcol />
             <div className={style.rightcol}>
-                <div className={style.content} ref={ref}>
+                <div className={style.content}>
                     <div>
                         <h1>Sign in</h1>
                         <small>Buy what ice cream you want sign in first.
@@ -90,3 +84,4 @@ function SignIn() {
 
 
 export { SignIn };
+

@@ -6,7 +6,7 @@ const style: CSSProperties = {
     border: "2px solid #ff0000"
 }
 
-function Input({ name, placeholder, type, setState, hasError, onChange }: { name: string, placeholder: string, type: string, setState: Function, hasError: string, onChange?: Function }) {
+function Input({ name, placeholder, type, setState, hasError, onChange }: { name: string, placeholder: string, type: string, setState: Function, hasError?: string, onChange?: Function }) {
     const stateChange = (e: ChangeEvent, setter: Function) => {
         const element = e.target as HTMLInputElement;
         setter(element.value);

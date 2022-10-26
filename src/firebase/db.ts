@@ -1,4 +1,4 @@
-import { getFirestore } from "firebase/firestore"
+import { connectFirestoreEmulator, getFirestore } from "firebase/firestore"
 import app from "./app";
 // import the config
 
@@ -8,4 +8,7 @@ const db = () => {
     const firestore = getFirestore(app());
     return firestore;
 };
+
+
+
 export default db;
