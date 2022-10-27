@@ -1,7 +1,7 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import Link from "next/link";
 import { useState } from "react";
-import auth, { authEmulator } from "../../firebase/auth";
+import auth from "../../firebase/auth";
 import { Input } from "../input";
 import { Leftcol } from "../leftcol";
 // the css for this is also sign -up page so import the sign-up page on '../sign-up/style.module.scss';
@@ -52,11 +52,7 @@ function SignIn() {
                         </small>
                         <br />
                         <Link href={"/"} >
-                            <a>
-                                <small style={{ color: "#000" }}>
-                                    Explore more.
-                                </small>
-                            </a>
+                            Explore more.
                         </Link>
                     </div>
                     <br />
@@ -72,7 +68,7 @@ function SignIn() {
                     <small style={{ "textAlign": "center" }}>
                         Don't have account yet?{" "}
                         <Link href={"/sign-up"}>
-                            <a href="#">Create account.</a>
+                            Create account.
                         </Link>
                     </small>
                     <br />

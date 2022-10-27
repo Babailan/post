@@ -10,4 +10,4 @@ function Page(props) {
     return <div>HELLO</div>
 }
 
-export default Page;
+export default Page

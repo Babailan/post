@@ -4,7 +4,6 @@ export default function Document() {
     return (
         <Html>
             <Head >
-                {/* load icons from google api */}
                 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
                     rel="stylesheet"></link>
             </Head>

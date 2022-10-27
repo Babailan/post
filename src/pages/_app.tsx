@@ -16,11 +16,12 @@ function MyApp({ Component, pageProps }) {
 
     useEffect(() => {
         const f = auth();
-        // comment this line 18 if deployment;
+        // comment this line 20 to 23 if deployment;
         if (process.env.NODE_ENV === "development") {
-            // connectAuthEmulator(f, 'http://localhost:9099');
-            // connectFirestoreEmulator(db(), 'localhost', 8080);
+            connectAuthEmulator(f, 'http://localhost:9099');
+            connectFirestoreEmulator(db(), 'localhost', 8080);
         }
+
         f.onAuthStateChanged((v) => {
             setUser(v);
         });

@@ -7,7 +7,7 @@ import stylesignIn from '../sign-up/style.module.scss';
 import { useContext } from 'react';
 import userContext from '../../context/user'
 
-function Navbar(props) {
+function Navbar() {
     // const router = Router.
     const router = useRouter();
 

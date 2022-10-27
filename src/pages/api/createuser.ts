@@ -15,7 +15,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const data = await getDoc(userDoc);
         res.end(JSON.stringify(data.data()));
     } catch (err) {
-        console.log(typeof err)
         res.end(JSON.stringify(err));
     }
 }
