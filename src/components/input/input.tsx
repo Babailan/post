@@ -1,10 +1,6 @@
 import { ChangeEvent, CSSProperties } from "react";
+import style from './style.module.scss'
 
-
-const style: CSSProperties = {
-    color: "#ff0000 !important",
-    border: "2px solid #ff0000"
-}
 
 function Input({ name, placeholder, type, setState, hasError, onChange }: { name: string, placeholder: string, type: string, setState: Function, hasError?: string, onChange?: Function }) {
     const stateChange = (e: ChangeEvent, setter: Function) => {
@@ -19,7 +15,7 @@ function Input({ name, placeholder, type, setState, hasError, onChange }: { name
     }
     return (
         <>
-            <input name={name} placeholder={placeholder} style={hasError ? style : null} type={type} onChange={textChange}></input>
+            <input name={name} placeholder={placeholder} className={`${style.input} ${hasError ? style.error : ""}`} type={type} onChange={textChange}></input>
             <small style={{ color: "#ff0000" }}>{hasError}</small>
         </>
     )

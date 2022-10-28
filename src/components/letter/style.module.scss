@@ -1,0 +1,75 @@
+.container {
+    background-color: #fff;
+    color: #000000;
+    min-width: 40px;
+    min-height: 40px;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-left: 0.5em;
+    text-transform: uppercase;
+    position: relative;
+
+    .pointer {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 1;
+        cursor: pointer;
+    }
+
+
+    .dropDown {
+        position: absolute;
+        top: 120%;
+        border: 1px solid #fff;
+        padding: 0.5em;
+        border-radius: 5px;
+        background-color: #000000;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        width: 260px;
+        gap: 0.5em;
+
+        >* {
+            text-transform: capitalize;
+            text-decoration: none;
+        }
+
+
+        >div,
+        a {
+            padding: 0.5em 1em;
+
+            &:hover {
+                background-color: #fff;
+                border-radius: 5px;
+                cursor: pointer;
+
+
+                small {
+                    color: #000000 !important;
+                }
+            }
+        }
+
+        .displayName {
+            text-transform: capitalize;
+            padding: 0.5em 1em;
+        }
+
+        hr,
+        .displayName {
+            pointer-events: none;
+        }
+
+        .logout {
+            background-color: #000000;
+        }
+    }
+}

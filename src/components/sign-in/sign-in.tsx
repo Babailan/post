@@ -1,6 +1,6 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import Link from "next/link";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import auth from "../../firebase/auth";
 import { Input } from "../input";
 import { Leftcol } from "../leftcol";
@@ -19,7 +19,8 @@ function SignIn() {
     const [errors, setErrors] = useState(defaultErrors);
 
 
-    const signIn = async () => {
+    const signIn = async (e: FormEvent) => {
+        e.preventDefault();
         if (!email) {
             setErrors(p => {
                 return { ...p, email: "Please provide Email" };
@@ -40,6 +41,7 @@ function SignIn() {
             setErrors(validator(err.code));
         }
     }
+
     return (
         <div className={style.container}>
             <Leftcol />
@@ -52,16 +54,21 @@ function SignIn() {
                         </small>
                         <br />
                         <Link href={"/"} >
-                            Explore more.
+                            <small>
+                                Explore more.
+                            </small>
                         </Link>
                     </div>
                     <br />
-                    <h1></h1>
-                    <Input onChange={() => setErrors(defaultErrors)} name={"email"} placeholder={"Email address"} type={"text"} hasError={errors.email} setState={setEmail}></Input>
-                    <br />
-                    <Input onChange={() => setErrors(defaultErrors)} name="password" placeholder="Password" type={"password"} hasError={errors.password} setState={setPassword}></Input>
-                    <br />
-                    <div className={style.submit} onClick={signIn}>Log in</div>
+                    <form onSubmit={signIn}>
+                        <Input onChange={() => setErrors(defaultErrors)} name={"email"} placeholder={"Email address"} type={"text"} hasError={errors.email} setState={setEmail}></Input>
+                        <br />
+                        <br />
+                        <Input onChange={() => setErrors(defaultErrors)} name="password" placeholder="Password" type={"password"} hasError={errors.password} setState={setPassword}></Input>
+                        <br />
+                        <br />
+                        <button className={style.submit} type={'submit'}>Log in</button>
+                    </form>
                     <br />
                     <hr />
                     <br />

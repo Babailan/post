@@ -1,11 +1,11 @@
 // import Image from "next/image";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import style from './style.module.scss';
 import { Input } from "../input";
 import { Leftcol } from "../leftcol";
 import Link from "next/link";
 import auth from "../../firebase/auth";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import code from "../../libs/codeError";
 import axios from "axios";
 
@@ -22,7 +22,8 @@ function SignUp() {
     const [errors, setErrors] = useState(defaultErrors);
 
 
-    async function createAccount() {
+    async function createAccount(e: FormEvent) {
+        e.preventDefault();
         if (!displayName) {
             setErrors(p => {
                 return { ...p, displayName: "Please provide display name." };
@@ -42,14 +43,14 @@ function SignUp() {
             return;
         }
         try {
-            const f = await createUserWithEmailAndPassword(auth(), email, password);
-            // axios
-            console.log(f)
-        }
-        catch (err) {
-            code(err.code)
+            const x = await axios.post('/api/createuser', { email, password, displayName });
+            signInWithEmailAndPassword(auth(), email, password);
+        } catch (err) {
+            const data = err.response.data;
+            setErrors(code(data.code));
         }
     };
+
 
     return (
         <>
@@ -62,30 +63,32 @@ function SignUp() {
                             <h1>Sign Up</h1>
                             <small>It&apos;s Quick And Easy.</small>
                             <br />
-                            <Link href={"/"} >
-                                <a>
-                                    <small style={{ color: "#000" }}>
-                                        Explore more.
-                                    </small>
-                                </a>
-                            </Link>
+                            <small>
+                                <Link href={"/"} style={{ color: "#000" }} >
+                                    Explore more.
+                                </Link>
+                            </small>
                         </div>
                         <br />
-                        <h1></h1>
-                        <Input name={"username"} hasError={errors.displayName} placeholder={"Username"} type={"text"} setState={setDisplayName}></Input>
-                        <br />
-                        <Input onChange={() => setErrors(defaultErrors)} hasError={errors.password} name="password" placeholder="Password" type={"password"} setState={setPassword}></Input>
-                        <br />
-                        <Input onChange={() => setErrors(defaultErrors)} hasError={errors.email} name="email" placeholder="Email" type={"text"} setState={setEmail}></Input>
-                        <br />
-                        <div className={style.submit} onClick={createAccount}>Sign up</div>
+                        <form onSubmit={createAccount}>
+                            <Input name={"username"} hasError={errors.displayName} placeholder={"Display Name"} type={"text"} setState={setDisplayName}></Input>
+                            <br />
+                            <br />
+                            <Input onChange={() => setErrors(defaultErrors)} hasError={errors.password} name="password" placeholder="Password" type={"password"} setState={setPassword}></Input>
+                            <br />
+                            <br />
+                            <Input onChange={() => setErrors(defaultErrors)} hasError={errors.email} name="email" placeholder="Email" type={"text"} setState={setEmail}></Input>
+                            <br />
+                            <br />
+                            <button className={style.submit} onSubmit={createAccount}>Sign up</button>
+                        </form>
                         <br />
                         <hr />
                         <br />
                         <small style={{ "textAlign": "center" }}>
                             Already have account?{" "}
-                            <Link href={"/sign-in"}>
-                                <a href="#">Login.</a>
+                            <Link href={"/sign-in"} >
+                                Login in
                             </Link>
                         </small>
                         <br />

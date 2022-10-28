@@ -10,7 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
         if (!process.env.emulator && process.env.NODE_ENV === "development") {
             process.env.emulator = "1";
-            // first run on server
+            // first run on server;
             connectAuthEmulator(auth(), 'http://localhost:9099');
             connectFirestoreEmulator(db(), 'localhost', 8080);
         } else {

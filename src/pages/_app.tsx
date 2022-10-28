@@ -21,8 +21,8 @@ function MyApp({ Component, pageProps }) {
             connectAuthEmulator(f, 'http://localhost:9099');
             connectFirestoreEmulator(db(), 'localhost', 8080);
         }
-
         f.onAuthStateChanged((v) => {
+            console.log(v);
             setUser(v);
         });
     }, []);

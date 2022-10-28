@@ -6,10 +6,10 @@ import style from "../style.module.scss"
 function MiddleNav({ router }: { router: NextRouter }) {
     return (
         <div className={style.middle}>
-            <Link href={"/"}>
+            <Link href={"/"} style={{ textDecoration: "none" }}>
                 <div style={{ "borderBottom": router.asPath === "/" ? "2px solid #ffffff" : "none" }}>Explore</div>
             </Link>
-            <Link href={"/variety"}>
+            <Link href={"/variety"} style={{ textDecoration: "none" }}>
                 <div style={{ "borderBottom": router.asPath === "/variety" ? "2px solid #ffffff" : "none" }}>Variety</div>
             </Link>
         </div >
