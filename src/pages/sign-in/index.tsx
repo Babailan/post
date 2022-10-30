@@ -4,12 +4,12 @@ import { SignIn } from "../../components";
 import User from "../../context/user";
 
 function Page() {
-    const userProvider = useContext(User);
+    const { user } = useContext(User)
     useEffect(() => {
-        if (userProvider.user) {
+        if (user) {
             Router.push("/");
         };
-    });
+    }, [user]);
     return <SignIn />;
 }
 

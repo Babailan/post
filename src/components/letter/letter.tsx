@@ -1,4 +1,6 @@
+import { GetServerSidePropsContext } from "next";
 import Link from "next/link";
+import Router from "next/router";
 import { useContext, useEffect, useRef, useState } from "react";
 import User from "../../context/user";
 import auth from "../../firebase/auth";
@@ -27,19 +29,30 @@ export function Letter({ children }) {
     }, []);
 
     return (
-        <div
-            className={style.container}
-
-
-        >
-            {children}
-            <span className={style.pointer} ref={HTMLCircle} onClick={() => setDropdown((p) => !p)}></span>
+        <div className={style.container}>
+            <span
+                className={style.pointer}
+                ref={HTMLCircle}
+                onClick={() => setDropdown((p) => !p)}
+            >
+                {children}
+            </span>
             {dropDown && (
                 <div className={style.dropDown} ref={HTMLDropDown}>
                     <small className={style.displayName}>{user.displayName}</small>
                     <hr></hr>
-                    <div className={style.settings}>
+                    <div
+                        className={style.settings}
+                        onClick={() => {
+                            if (!(Router.pathname === "/settings")) {
+                                Router.push("/settings");
+                            }
+                        }}
+                    >
                         <small>Settings</small>
+                    </div>
+                    <div className={style.privacy}>
+                        <small>Privacy</small>
                     </div>
                     <div onClick={() => auth().signOut()}>
                         <small>Log out</small>

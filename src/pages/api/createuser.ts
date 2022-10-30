@@ -23,7 +23,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         // if not exist create one in firestore also change the display name in auth firebase.
         if (!userDoc.exists()) {
             setDoc(userData, { displayName, email });
-            updateProfile(user, { displayName })
+            updateProfile(user, { displayName });
         };
         res.end(JSON.stringify(req.body));
         // const set = await setDoc(userDoc, { displayName });

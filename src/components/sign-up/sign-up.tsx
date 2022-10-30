@@ -9,7 +9,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "fire
 import code from "../../libs/codeError";
 import axios from "axios";
 
-function SignUp() {
+export function SignUp() {
     const [displayName, setDisplayName] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [email, setEmail] = useState<string>("");
@@ -44,7 +44,7 @@ function SignUp() {
         }
         try {
             const x = await axios.post('/api/createuser', { email, password, displayName });
-            signInWithEmailAndPassword(auth(), email, password);
+            await signInWithEmailAndPassword(auth(), email, password);
         } catch (err) {
             const data = err.response.data;
             setErrors(code(data.code));
@@ -100,4 +100,3 @@ function SignUp() {
 }
 
 
-export { SignUp };

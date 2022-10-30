@@ -8,7 +8,7 @@ import { Leftcol } from "../leftcol";
 import style from '../sign-up/style.module.scss';
 import validator from '../../libs/codeError';
 
-function SignIn() {
+export function SignIn() {
     const [password, setPassword] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const defaultErrors = {
@@ -86,5 +86,5 @@ function SignIn() {
 };
 
 
-export { SignIn };
+
 

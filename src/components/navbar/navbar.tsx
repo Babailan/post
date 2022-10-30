@@ -9,7 +9,7 @@ import userContext from '../../context/user'
 import User from '../../context/user';
 import { Letter } from '../letter';
 
-function Navbar() {
+export function Navbar() {
     // const router = Router.
     const router = useRouter();
     const { user } = useContext(User)
@@ -48,4 +48,3 @@ function Navbar() {
     )
 }
 
-export default Navbar;

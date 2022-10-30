@@ -1,0 +1,23 @@
+.container {
+    max-width: 800px;
+    margin: auto;
+    font-size: 1em;
+
+    .pyramid {
+        width: 100%;
+
+        .displayName {
+            text-transform: capitalize;
+        }
+
+        .change {
+            text-align: right;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        td {
+            padding: 1em;
+        }
+    }
+}

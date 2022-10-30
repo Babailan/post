@@ -5,7 +5,7 @@ import Image2 from '../../images/a.jpg'
 import Image3 from '../../images/c.jpg'
 import Image4 from '../../images/b.jpg'
 
-function Leftcol() {
+export function Leftcol() {
     return (
         <div className={style.leftcol}>
             <div className={style.one}><Image src={Image2} alt={"image1"} className={style.contain} sizes={null} loading={"lazy"} /></div>
@@ -15,4 +15,3 @@ function Leftcol() {
         </div>
     )
 }
-export { Leftcol };
