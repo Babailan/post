@@ -1,7 +1,7 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import Link from "next/link";
 import { FormEvent, useState } from "react";
-import auth from "../../firebase/auth";
+import app from "../../firebase/client/app";
 import { Input } from "../input";
 import { Leftcol } from "../leftcol";
 // the css for this is also sign -up page so import the sign-up page on '../sign-up/style.module.scss';
@@ -34,9 +34,9 @@ export function SignIn() {
         if (!email || !password) {
             return;
         }
-
         try {
-            await signInWithEmailAndPassword(auth(), email, password);
+            const auth = getAuth(app)
+            await signInWithEmailAndPassword(auth, email, password);
         } catch (err) {
             setErrors(validator(err.code));
         }

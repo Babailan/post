@@ -1,36 +1,44 @@
-import row from "./info";
+import Link from "next/link";
+import { useState } from "react";
+import { Loader } from "../loader";
+import RowSettings from "./row/row";
 import style from "./style.module.scss";
 
 export function Settings({ info }) {
-    return (
-        <div className={style.container}>
-            <h2>General account settings</h2>
-            <br />
-            <hr />
-            <br />
-            <table className={style.pyramid}>
-                <tbody>
-                    {row.map((v, index) => {
-                        if (v.identifier === "password") {
-                            return (
-                                <tr key={index}>
-                                    <td>{v.col1}</td>
-                                    <td>{v.col2}</td>
-                                    <td className={style.change}>Change</td>
-                                </tr>
-                            );
-                        }
-                        const y = eval("v.identifier");
-                        return (
-                            <tr key={index}>
-                                <td>{v.col1}</td>
-                                <td style={{ "textTransform": `${y == "displayName" ? "capitalize" : null}` }}>{eval(`info.${y}`)}</td>
-                                <td className={style.change}>Change</td>
-                            </tr>
-                        );
-                    })}
-                </tbody>
-            </table>
-        </div>
+    const [settings, setSettings] = useState({
+        profilepic: false,
+        displayName: false,
+        email: false,
+        password: false
+    });
+
+    return (<>
+        {info ?
+            <div className={style.container}>
+                <h3>General account settings</h3>
+                <br />
+                <hr />
+                <br />
+                <table className={style.table}>
+                    <tbody>
+                        {/* <RowSettings title={"Profile picture"} changeClick={() => { }} ></RowSettings> */}
+                        <RowSettings title={"Display name"} changeClick={() => { }} >{info.displayName}</RowSettings>
+                        <RowSettings title={"Email"} changeClick={() => { }} >{info.email}</RowSettings>
+                        <RowSettings title={"Password"} changeClick={() => { }}>********</RowSettings>
+                    </tbody>
+                </table>
+                <button className={style.deleteAccount}>Delete account</button>
+                <div>
+                    <small className={style.goBack}>
+                        <Link href={"/"}>Go back</Link>
+                    </small>
+                </div>
+            </div>
+            :
+            <div className={style.main}>
+                <Loader />
+            </div>
+        }
+    </>
     );
-}
+};

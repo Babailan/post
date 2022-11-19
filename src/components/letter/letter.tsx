@@ -1,9 +1,8 @@
-import { GetServerSidePropsContext } from "next";
-import Link from "next/link";
+import { getAuth } from "firebase/auth";
 import Router from "next/router";
 import { useContext, useEffect, useRef, useState } from "react";
 import User from "../../context/user";
-import auth from "../../firebase/auth";
+import app from "../../firebase/client/app";
 import style from "./style.module.scss";
 
 // for dropdown of profile;
@@ -54,7 +53,7 @@ export function Letter({ children }) {
                     <div className={style.privacy}>
                         <small>Privacy</small>
                     </div>
-                    <div onClick={() => auth().signOut()}>
+                    <div onClick={() => getAuth(app).signOut()}>
                         <small>Log out</small>
                     </div>
                 </div>

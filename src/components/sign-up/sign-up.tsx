@@ -4,15 +4,15 @@ import style from './style.module.scss';
 import { Input } from "../input";
 import { Leftcol } from "../leftcol";
 import Link from "next/link";
-import auth from "../../firebase/auth";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import code from "../../libs/codeError";
+import app from "../../firebase/client/app";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import axios from "axios";
 
 export function SignUp() {
     const [displayName, setDisplayName] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [email, setEmail] = useState<string>("");
+
     const defaultErrors = {
         displayName: "",
         email: "",
@@ -39,15 +39,16 @@ export function SignUp() {
                 return { ...p, password: "Please provide password" };
             })
         }
-        if (!displayName || !email || !password) {
-            return;
-        }
         try {
+            const auth = getAuth(app);
             const x = await axios.post('/api/createuser', { email, password, displayName });
-            await signInWithEmailAndPassword(auth(), email, password);
+            await signInWithEmailAndPassword(auth, email, password);
         } catch (err) {
             const data = err.response.data;
-            setErrors(code(data.code));
+            if (data) {
+                console.log(JSON.stringify(data));
+                // setErrors(code(data.code));
+            }
         }
     };
 

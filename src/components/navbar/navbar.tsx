@@ -1,11 +1,8 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import auth from '../../firebase/auth';
 import MiddleNav from './middle';
 import style from './style.module.scss';
-import stylesignIn from '../sign-up/style.module.scss';
 import { useContext } from 'react';
-import userContext from '../../context/user'
 import User from '../../context/user';
 import { Letter } from '../letter';
 
@@ -20,8 +17,11 @@ export function Navbar() {
     return (
         <div className={style.container}>
             <div className={style.icon}>
-                <Link href={"/"}>
-                    <small>IceCream.Store</small>
+                <Link style={{ "textDecoration": "none" }} href={"/"}>
+                    <span className="material-icons">
+                        local_cafe
+                    </span>
+                    <span>ream</span>
                 </Link>
             </div>
             <MiddleNav router={router} />

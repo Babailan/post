@@ -10,6 +10,7 @@ function Page() {
             Router.push("/");
         };
     }, [user]);
+
     return <SignUp />;
 }
 

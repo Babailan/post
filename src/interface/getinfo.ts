@@ -1,13 +1,14 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { decode } from 'jsonwebtoken';
-import { doc, getDoc, getDocFromServer } from "firebase/firestore";
+import { doc, getDocFromServer } from "firebase/firestore";
 import db from "../../firebase/db";
 import axios from "axios";
+
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
         if (req.method.toLowerCase() === "post") {
-            if (process.env.NODE_ENV === "development") {
+            if (process.env.NODE_ENV === "development" && process.env.local === "true") {
                 await axios.get("http://localhost:3000/api/emulator");
             };
             const { token } = req.body;
@@ -20,6 +21,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         console.log(err);
         res.statusCode = 500;
         res.end("there something wrong");
-
     }
 };

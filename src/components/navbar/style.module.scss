@@ -5,9 +5,11 @@
     align-items: center;
 
     .icon {
-        small {
+        * {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 1.2em;
-            cursor: pointer;
         }
     }
 
@@ -52,5 +54,24 @@
     .line {
         width: 1px;
         background-color: #dadada;
+    }
+}
+
+@media (max-width:869px) {
+    .container {
+        .middle {
+            display: none;
+        }
+    }
+}
+
+@media (max-width:569px) {
+    .container {
+        .rightcol {
+            .cartContainer {
+                display: none;
+
+            }
+        }
     }
 }
