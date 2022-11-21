@@ -1,14 +1,13 @@
-import Link from "next/link";
-import { useContext, useState } from "react";
+import { useRouter } from "next/router";
 import style from "./style.module.scss";
-
 function Delete() {
-  const [show, setShow] = useState(false);
+  const router = useRouter();
   return (
-    <div className={style.container}>
-      <Link href={"/settings/delete"} className={style.deleteAccount} onClick={() => setShow(true)}>
-        Delete account
-      </Link>
+    <div
+      className={style.container}
+      onClick={() => router.push("/settings/delete")}
+    >
+      Delete Account
     </div>
   );
 }

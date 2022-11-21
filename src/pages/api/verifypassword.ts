@@ -13,15 +13,12 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    const { token } = req.body;
-    console.log(token);
-    const { uid } = await auth.verifyIdToken(token);
-    const user = firestore.doc(`/users/${uid}`);
-    await user.delete();
-    await auth.deleteUser(uid);
+    const { token, password } = req.body;
+
+    // const user = firestore.doc(`/users/${uid}`);
+    // user.set({ displayName });
     res.end("HELLO");
   } catch (err) {
-    console.log(err);
     res.end("error");
     return;
   }

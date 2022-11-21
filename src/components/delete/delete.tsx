@@ -1,23 +1,26 @@
 import axios from "axios";
+import { getAuth } from "firebase/auth";
 import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
 import User from "../../context/user";
+import app from "../../firebase/client/app";
 import style from "./style.module.scss";
 
 function Delete() {
   const { user } = useContext(User);
   const router = useRouter();
-  useEffect(()=> {
-    if(!user) {
-      router.push('/');
+  useEffect(() => {
+    if (!user) {
+      router.push("/");
     }
-  },[])
+  }, []);
   const proceedDelete = async () => {
     try {
-      const token = await user.getIdToken();
-      await axios.post("/api/deleteaccount",{token});
+      const auth = getAuth(app);
+      const token = await auth.currentUser.getIdToken(true);
+      const y = await axios.post("/api/deleteaccount", { token });
+      console.log(y);
       await router.push("/");
-      router.reload();
     } catch (err) {
       console.log(err);
     }

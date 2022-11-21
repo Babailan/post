@@ -1,15 +1,11 @@
 .container {
-    margin: 2em 0;
-}
-.deleteAccount {
     padding: 1em;
-    background-color: transparent;
-    border: 1px solid #ff0000;
-    margin: 1em;
     color: #ff0000;
+    background-color: #000;
+    border: 1px solid #ff0000;
+    margin: auto;
+    width: fit-content;
     cursor: pointer;
-    text-decoration: none;
-
     &:hover {
         background-color: #ff0000;
         color: #fff;

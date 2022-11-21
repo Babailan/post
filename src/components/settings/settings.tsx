@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useState, useSyncExternalStore } from "react";
 import { Loader } from "../loader";
 import Delete from "./delete/delete";
-import Input from "./input/input";
 import style from "./style.module.scss";
 
 export function Settings({ info }) {
@@ -11,6 +11,7 @@ export function Settings({ info }) {
 
   const [displayPassword, setDisplayPassword] = useState("");
   const [newDisplayName, setNewDisplayName] = useState("");
+  const router = useRouter();
 
   return (
     <>
@@ -19,7 +20,7 @@ export function Settings({ info }) {
           <h2 className={style.header}>General Account Settings</h2>
           <hr className={style.line} />
           <div className={style.settingsContainer}>
-            <div className={style.info}>
+            <div className={style.info} onClick={()=> router.push("/settings/displayname")}>
               <div>
                 <p>Display Name</p>
                 <p>{info.displayName}</p>

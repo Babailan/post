@@ -7,6 +7,7 @@ import Link from "next/link";
 import app from "../../firebase/client/app";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import axios from "axios";
+import codeError from '../../libs/codeError';
 
 export function SignUp() {
     const [displayName, setDisplayName] = useState<string>("");
@@ -42,12 +43,12 @@ export function SignUp() {
         try {
             const auth = getAuth(app);
             const x = await axios.post('/api/createuser', { email, password, displayName });
+            console.log(x);
             await signInWithEmailAndPassword(auth, email, password);
         } catch (err) {
-            const data = err.response.data;
+            const data = err?.response?.data;
             if (data) {
-                console.log(JSON.stringify(data));
-                // setErrors(code(data.code));
+                setErrors(codeError(data.code));
             }
         }
     };

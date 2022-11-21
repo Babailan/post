@@ -1,6 +1,7 @@
 // firebase validator 
 // https://firebase.google.com/docs/auth/admin/errors
 function code(errorCode: string) {
+    console.log(errorCode)
     const setterObject = {
         displayName: "",
         password: "",
@@ -19,6 +20,9 @@ function code(errorCode: string) {
     }
     if (errorCode.includes("weak-password")) {
         setterObject.password = "Weak password";
+    }
+    if(errorCode.includes("auth/email-already-exists")) {
+        setterObject.email = "Already Exists"
     }
     return setterObject;
 }

@@ -18,8 +18,8 @@ function MyApp({ Component, pageProps }) {
         if (process.env.NODE_ENV === "development" && !process.env.emulator) {
             const f = getAuth(app);
             const db = getFirestore(app);
-            connectAuthEmulator(f, "http://localhost:9099");
-            connectFirestoreEmulator(db, "localhost", 8080);
+            // connectAuthEmulator(f, "http://localhost:9099");
+            // connectFirestoreEmulator(db, "localhost", 8080);
             process.env.emulator = "1";
         }
         f.onAuthStateChanged((v) => {
