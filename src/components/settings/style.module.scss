@@ -1,52 +1,19 @@
-.main {
+.header {
+    text-align: center;
+    padding: 1em;
+}
+.info {
+    margin: 1em;
     display: flex;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
-}
-
-.container {
-    max-width: 800px;
-    margin: auto;
-    font-size: 1em;
-
-    h3 {
-        padding: 1em 1em 0 1em;
-    }
-
-    .table {
-        width: 100%;
-
-    }
-
-    .deleteAccount {
-        background-color: #000000;
-        padding: 1em;
-        border: 1px solid #ff0000;
-        margin: 1em;
-        color: #ff0000;
-        cursor: pointer;
-
-        &:hover {
-            background-color: #ff0000;
-            color: #fff;
-        }
-    }
-
-    .goBack {
-        >a {
-            padding: 1em;
-            color: #60aaff;
-        }
-    }
-}
-
-
-
-@media (max-width:869px) {
-    .container {
-        h3 {
-            text-align: center;
+    justify-content: space-between;
+    padding: 1em;
+    border: 1px solid #fff;
+    cursor: pointer;
+    &:hover {
+        background-color: #fff;
+        * {
+            color: #000 ;
         }
     }
 }

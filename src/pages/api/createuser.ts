@@ -16,7 +16,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const { uid } = await auth.createUser({ email, password, displayName });
         const firestore = getFirestore(app);
         const doc = firestore.doc(`/users/${uid}`);
-        await doc.create({ displayName, email });
+         await doc.create({ displayName, email });
         res.end(JSON.stringify(req.body));
     } catch (err) {
         console.table(err);

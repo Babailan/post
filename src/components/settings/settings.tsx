@@ -1,44 +1,43 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Loader } from "../loader";
-import RowSettings from "./row/row";
+import Delete from "./delete/delete";
+import Input from "./input/input";
 import style from "./style.module.scss";
 
 export function Settings({ info }) {
-    const [settings, setSettings] = useState({
-        profilepic: false,
-        displayName: false,
-        email: false,
-        password: false
-    });
+  const [newEmail, setNewEmail] = useState("");
+  const [emailPassword, setEmailPassword] = useState("");
 
-    return (<>
-        {info ?
-            <div className={style.container}>
-                <h3>General account settings</h3>
-                <br />
-                <hr />
-                <br />
-                <table className={style.table}>
-                    <tbody>
-                        {/* <RowSettings title={"Profile picture"} changeClick={() => { }} ></RowSettings> */}
-                        <RowSettings title={"Display name"} changeClick={() => { }} >{info.displayName}</RowSettings>
-                        <RowSettings title={"Email"} changeClick={() => { }} >{info.email}</RowSettings>
-                        <RowSettings title={"Password"} changeClick={() => { }}>********</RowSettings>
-                    </tbody>
-                </table>
-                <button className={style.deleteAccount}>Delete account</button>
-                <div>
-                    <small className={style.goBack}>
-                        <Link href={"/"}>Go back</Link>
-                    </small>
-                </div>
+  const [displayPassword, setDisplayPassword] = useState("");
+  const [newDisplayName, setNewDisplayName] = useState("");
+
+  return (
+    <>
+      {info ? (
+        <div>
+          <h2 className={style.header}>General Account Settings</h2>
+          <hr className={style.line} />
+          <div className={style.settingsContainer}>
+            <div className={style.info}>
+              <div>
+                <p>Display Name</p>
+                <p>{info.displayName}</p>
+              </div>
+              <span className="material-icons">chevron_right</span>
+
             </div>
-            :
-            <div className={style.main}>
-                <Loader />
+            <div className={style.info}>
+              <div>
+                <p>Email</p>
+                <p>{info.email}</p>
+              </div>
+              <span className="material-icons">chevron_right</span>
             </div>
-        }
+          </div>
+          <Delete/>
+        </div>
+      ) : null}
     </>
-    );
-};
+  );
+}

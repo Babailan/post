@@ -15,21 +15,21 @@ function MyApp({ Component, pageProps }) {
     useEffect(() => {
         // comment this line 20 to 23 if deployment;
         const f = getAuth(app);
-        if (process.env.NODE_ENV === "development") {
+        if (process.env.NODE_ENV === "development" && !process.env.emulator) {
             const f = getAuth(app);
             const db = getFirestore(app);
             connectAuthEmulator(f, "http://localhost:9099");
             connectFirestoreEmulator(db, "localhost", 8080);
+            process.env.emulator = "1";
         }
         f.onAuthStateChanged((v) => {
-            console.log(v);
             setUser(v);
         });
     }, []);
 
     return (
         <Theme.Provider value={{ user: user }}>
-            {(router.pathname == "/sign-up" ||
+            {(router.pathname == "/sign-up" || router.pathname == "/settings/delete"||
                 router.pathname == "/sign-in" || router.pathname == "/settings") ? null : (
                 <Navbar />
             )}
